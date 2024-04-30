@@ -307,6 +307,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b3071c34bc36e40b371ada39e2e409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  acceleration: 10
+  maxSpeed: 100
+  rotationAcceleration: 50
+  dragForce: 0.1
 --- !u!212 &2067514872
 SpriteRenderer:
   m_ObjectHideFlags: 0
