@@ -9,9 +9,9 @@ public class PanelManager : MonoBehaviour
 
     private void ClearAll()
     {
-        for(int i = 0; i < transform.childCount -1; i++)
+        for(int i = 0; i < transform.childCount -2; i++)
         {
-            transform.GetChild(i).gameObject.SetActive(false);
+            if(i != 0) transform.GetChild(i).gameObject.SetActive(false);
         }
     }
 
