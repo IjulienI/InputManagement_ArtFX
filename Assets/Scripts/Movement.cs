@@ -7,63 +7,26 @@ public class Movement : MonoBehaviour
 {
     [Header("Movements")]
 
-    [SerializeField]private int acceleration = 150;
-    [SerializeField]private int maxSpeed = 500;
-    [SerializeField]private int rotationAcceleration = 50;
-    [SerializeField]private float dragForce;
+    [SerializeField]private float speed = 25;
+    [SerializeField]private int rotationSpeed = 150;
 
-    private float speed;
     private float rotation;
-    void Start()
-    {
-        
-    }
+    private Vector2 moveInput;
 
     void Update()
     {
         //applique les mouvements et les rotation
         ApplyMovement();
-        ApplyDrag();
-
-        if(Input.GetKey(KeyCode.W))
-        {
-            AddTransform();
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            RemoveTransform();
-        }
     }
 
-
-    void AddTransform()
+    private void ApplyMovement()
     {
-        if(speed < maxSpeed) speed += acceleration * Time.deltaTime;
-    }
+        moveInput.x = UserInput.instance.MoveInput.x;
+        moveInput.y = UserInput.instance.MoveInput.y;
 
-    void RemoveTransform()
-    {
-        if(speed > -maxSpeed) speed -= acceleration * Time.deltaTime;
-    }
+        rotation += rotationSpeed * -moveInput.x * Time.deltaTime;
 
-    void AddRotation()
-    {
-        rotation += rotationAcceleration * Time.deltaTime;
-    }
-
-    void RemoveRotation()
-    {
-        rotation -= rotationAcceleration * Time.deltaTime;
-    }
-
-    void ApplyMovement()
-    {
-        transform.position += transform.right * speed * Time.deltaTime;
+        transform.position += transform.right * moveInput.y * speed * Time.deltaTime;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, rotation));
-    }
-
-    void ApplyDrag()
-    {
-        transform.position -= transform.right * (dragForce * (1 * speed)) * Time.deltaTime;
     }
 }
